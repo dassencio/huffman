@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+
+
+################################################################################
+#
+#    Copyright (c) 2015, Diego Assencio (http://diego.assencio.com)
+#    All rights reserved.
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
+
+
+import sys
+import pickle
+import argparse
+from huffman import huffman
+from bitarray import bitarray
+
+
+def main(in_file, action):
+
+	if action == "compress":
+
+		text = in_file.read()
+
+		# determine the optimal symbol-to-bitstring mapping
+		H = huffman(text)
+
+		# encode text using the mapping H
+		E = bitarray()
+		E.encode(H, text)
+
+		# write H and E in binary format to stdout
+		pickle.dump(H, sys.stdout.buffer)
+		pickle.dump(E, sys.stdout.buffer)
+
+	elif action == "decompress":
+
+		# load: symbol-to-bitstring mapping H and the binary text b
+		H = pickle.load(in_file)
+		b = pickle.load(in_file)
+
+		# restore and print the original string
+		sys.stdout.write(''.join(b.decode(H)))
+
+	in_file.close()
+
+################################################################################
+
+if __name__ == '__main__':
+
+	# parse input parameters
+	parser = argparse.ArgumentParser()
+	parser.add_argument('-c', '--compress', type=argparse.FileType('r'),
+	                    required=False, metavar='FILE', help='compresses file')
+	parser.add_argument('-d', '--decompress', type=argparse.FileType('rb'),
+	                    required=False, metavar='FILE', help='decompresses file')
+
+	namespace = parser.parse_args()
+
+	cmp_file = namespace.compress
+	dec_file = namespace.decompress
+
+	if cmp_file:
+		main(cmp_file, "compress")
+	elif dec_file:
+		main(dec_file, "decompress")
+	else:
+		parser.print_help()
+		sys.exit(1)
