@@ -52,8 +52,9 @@ class huffman_tree():
 def huffman(text):
 
 	"""
-	Computes the optimal encoding of the input text using Huffman's
-	algorithm and returns it as a dictionary (symbol -> bitarray).
+	Computes the optimal variable-length encoding of the input text using
+	Huffman's algorithm and returns the obtained encoding as a dictionary
+	(symbol -> bitstring).
 	"""
 
 	if len(text) == 0:
