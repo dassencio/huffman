@@ -30,10 +30,10 @@ from collections import Counter
 class huffman_tree():
 
 	def __init__(self, symbol, weight, left=None, right=None):
-		self.left   = left
-		self.right  = right
 		self.symbol = symbol
 		self.weight = weight
+		self.left   = left
+		self.right  = right
 
 	def __lt__(self, right):
 		return self.weight < right.weight
