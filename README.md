@@ -1,5 +1,5 @@
-huffman
-=======
+Description
+===========
 
 huffman is a small python script that compresses/decompresses text files using
 Huffman's algorithm.
