@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dassencio/huffman.svg?branch=master)](https://travis-ci.org/dassencio/huffman)
+
 Description
 ===========
 

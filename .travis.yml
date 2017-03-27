@@ -1,0 +1,26 @@
+language: generic
+
+dist: trusty
+sudo: required
+
+git:
+  depth: 3
+
+install:
+  - python3 --version
+  - sudo add-apt-repository universe
+  - sudo apt-get update
+  - sudo apt-get install -qq python3-bitarray
+
+script:
+  - wget "http://diego.assencio.com" -O file.txt
+  - ./huffman -c file.txt > file.bin
+  - ./huffman -d file.bin > file_original.txt
+  - diff file.txt file_original.txt
+
+notifications:
+  email:
+    recipients:
+      - diego@assencio.com
+    on_success: change
+    on_failure: always
