@@ -1,10 +1,10 @@
 """An implementation of Huffman's algorithm."""
 
-
+import bitarray
+import collections
 import heapq
-from bitarray import bitarray
-from collections import Counter
 
+################################################################################
 
 class huffman_tree():
 
@@ -19,14 +19,17 @@ class huffman_tree():
 
 	def symbol_to_bitarray(self, symbol):
 		if symbol == self.symbol:
-			return bitarray()
+			return bitarray.bitarray()
 		elif self.left is not None and symbol in self.left.symbol:
-			return bitarray([0]) + self.left.symbol_to_bitarray(symbol)
+			return bitarray.bitarray([0]) + \
+			       self.left.symbol_to_bitarray(symbol)
 		elif self.right is not None and symbol in self.right.symbol:
-			return bitarray([1]) + self.right.symbol_to_bitarray(symbol)
+			return bitarray.bitarray([1]) + \
+			self.right.symbol_to_bitarray(symbol)
 		else:
 			raise ValueError("symbol %s not in tree" % symbol)
 
+################################################################################
 
 def huffman(text):
 
@@ -40,7 +43,7 @@ def huffman(text):
 		return dict()
 
 	# count the number of occurrences of each character on text
-	W = Counter(text)
+	W = collections.Counter(text)
 
 	if len(W) == 1:
 		return huffman_tree(symbols[0], weights[0])

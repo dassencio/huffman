@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 
-
-
-import sys
-import pickle
 import argparse
-from huffman import huffman
-from bitarray import bitarray
+import bitarray
+import huffman
+import pickle
+import sys
 
+################################################################################
 
 def main(in_file, action):
 
@@ -16,10 +15,10 @@ def main(in_file, action):
 		text = in_file.read()
 
 		# determine the optimal symbol-to-bitstring mapping
-		H = huffman(text)
+		H = huffman.huffman(text)
 
 		# encode text using the mapping H
-		E = bitarray()
+		E = bitarray.bitarray()
 		E.encode(H, text)
 
 		# write H and E in binary format to stdout
@@ -37,6 +36,7 @@ def main(in_file, action):
 
 	in_file.close()
 
+################################################################################
 
 if __name__ == '__main__':
 
