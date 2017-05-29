@@ -4,7 +4,6 @@ import bitarray
 import collections
 import heapq
 
-################################################################################
 
 class huffman_tree():
 
@@ -29,7 +28,6 @@ class huffman_tree():
 		else:
 			raise ValueError("symbol %s not in tree" % symbol)
 
-################################################################################
 
 def huffman(text):
 

@@ -6,7 +6,6 @@ import huffman
 import pickle
 import sys
 
-################################################################################
 
 def main(in_file, action):
 
@@ -36,7 +35,6 @@ def main(in_file, action):
 
 	in_file.close()
 
-################################################################################
 
 if __name__ == '__main__':
 
