@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """An implementation of Huffman's algorithm."""
 
 import bitarray
