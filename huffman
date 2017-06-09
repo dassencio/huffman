@@ -9,51 +9,61 @@ import sys
 
 def main(in_file, action):
 
-	if action == "compress":
+    if action == "compress":
 
-		text = in_file.read()
+        text = in_file.read()
 
-		# determine the optimal symbol-to-bitstring mapping
-		H = huffman.huffman(text)
+        # determine the optimal symbol-to-bitstring mapping
+        H = huffman.huffman(text)
 
-		# encode text using the mapping H
-		E = bitarray.bitarray()
-		E.encode(H, text)
+        # encode text using the mapping H
+        E = bitarray.bitarray()
+        E.encode(H, text)
 
-		# write H and E in binary format to stdout
-		pickle.dump(H, sys.stdout.buffer)
-		pickle.dump(E, sys.stdout.buffer)
+        # write H and E in binary format to stdout
+        pickle.dump(H, sys.stdout.buffer)
+        pickle.dump(E, sys.stdout.buffer)
 
-	elif action == "decompress":
+    elif action == "decompress":
 
-		# load: symbol-to-bitstring mapping H and the binary text b
-		H = pickle.load(in_file)
-		b = pickle.load(in_file)
+        # load: symbol-to-bitstring mapping H and the binary text b
+        H = pickle.load(in_file)
+        b = pickle.load(in_file)
 
-		# restore and print the original string
-		sys.stdout.write(''.join(b.decode(H)))
+        # restore and print the original string
+        sys.stdout.write("".join(b.decode(H)))
 
-	in_file.close()
+    in_file.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-	# parse input parameters
-	parser = argparse.ArgumentParser()
-	parser.add_argument('-c', '--compress', type=argparse.FileType('r'),
-	                    required=False, metavar='FILE', help='compresses file')
-	parser.add_argument('-d', '--decompress', type=argparse.FileType('rb'),
-	                    required=False, metavar='FILE', help='decompresses file')
+    # parse input parameters
+    parser = argparse.ArgumentParser()
 
-	namespace = parser.parse_args()
+    parser.add_argument("-c",
+                        "--compress",
+                        type=argparse.FileType("r"),
+                        required=False,
+                        metavar="FILE",
+                        help="compresses file")
 
-	cmp_file = namespace.compress
-	dec_file = namespace.decompress
+    parser.add_argument("-d",
+                        "--decompress",
+                        type=argparse.FileType("rb"),
+                        required=False,
+                        metavar="FILE",
+                        help="decompresses file")
 
-	if cmp_file:
-		main(cmp_file, "compress")
-	elif dec_file:
-		main(dec_file, "decompress")
-	else:
-		parser.print_help()
-		sys.exit(1)
+    namespace = parser.parse_args()
+
+    cmp_file = namespace.compress
+    dec_file = namespace.decompress
+
+    if cmp_file:
+        main(cmp_file, "compress")
+    elif dec_file:
+        main(dec_file, "decompress")
+    else:
+        parser.print_help()
+        sys.exit(1)
