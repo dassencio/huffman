@@ -19,10 +19,9 @@ file for more information.
 Required modules
 ================
 
-The `bitarray` module is used. On Ubuntu/Debian, you can install it with the
-following command:
+The `bitarray` module is used. You can install it with the following command:
 
-	sudo apt-get install python3-bitarray
+	pip3 install bitarray
 
 
 Usage instructions
