@@ -18,7 +18,8 @@ def main(in_file, action):
 
         # encode text using the mapping H
         E = bitarray.bitarray()
-        E.encode(H, text)
+        if len(text) > 0:
+            E.encode(H, text)
 
         # write H and E in binary format to stdout
         pickle.dump(H, sys.stdout.buffer)
@@ -31,7 +32,8 @@ def main(in_file, action):
         b = pickle.load(in_file)
 
         # restore and print the original string
-        sys.stdout.write("".join(b.decode(H)))
+        if len(b) > 0:
+            sys.stdout.write("".join(b.decode(H)))
 
     in_file.close()
 

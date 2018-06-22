@@ -17,10 +17,7 @@ install:
   - pip3 install bitarray
 
 script:
-  - wget "http://diego.assencio.com" -O file.txt
-  - ./huffman -c file.txt > file.bin
-  - ./huffman -d file.bin > file_original.txt
-  - diff file.txt file_original.txt
+  - ./run-tests
 
 notifications:
   email:

@@ -39,13 +39,12 @@ def huffman(text):
     """
 
     if len(text) == 0:
-        return dict()
+        return {}
+    if len(text) == 1:
+        return {text: bitarray.bitarray([0])}
 
     # count the number of occurrences of each character on text
     W = collections.Counter(text)
-
-    if len(W) == 1:
-        return huffman_tree(symbols[0], weights[0])
 
     # initial step: if we have n symbols, create n single-node trees
     trees = []

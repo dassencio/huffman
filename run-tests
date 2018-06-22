@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+touch empty
+echo -n "a" > small
+
+for file in empty small huffman.py
+do
+  ./huffman -c $file > $file.bin
+  ./huffman -d $file.bin > $file.original
+  diff $file $file.original
+  rm $file.bin $file.original
+  echo "Passed test for file: $file"
+done
+
+rm empty small
