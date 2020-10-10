@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.com/dassencio/huffman.svg?branch=master)](https://travis-ci.com/dassencio/huffman)
+![Functional tests](https://github.com/dassencio/huffman/workflows/Functional%20tests/badge.svg)
 
 # Description
 
