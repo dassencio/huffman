@@ -1,4 +1,5 @@
 ![Functional tests](https://github.com/dassencio/huffman/workflows/Functional%20tests/badge.svg)
+![Static code analysis](https://github.com/dassencio/huffman/workflows/Static%20code%20analysis/badge.svg)
 
 # Description
 
